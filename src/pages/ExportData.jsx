@@ -48,7 +48,7 @@ export default function ExportData() {
     const title = allTime ? 'All Time Budget Report' : `Budget Report — ${formatMonth(month)}`
 
     doc.setFontSize(20)
-    doc.setTextColor(240, 180, 41)
+    doc.setTextColor(13, 148, 136)
     doc.text('DoAide Budget', 14, 22)
 
     doc.setFontSize(14)
@@ -70,7 +70,7 @@ export default function ExportData() {
       head: [['Date', 'Type', 'Category', 'Amount', 'Note', 'Recurring']],
       body: tableData,
       styles: { fontSize: 9 },
-      headStyles: { fillColor: [240, 180, 41] },
+      headStyles: { fillColor: [13, 148, 136] },
     })
 
     const pageCount = doc.internal.getNumberOfPages()

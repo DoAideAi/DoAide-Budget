@@ -16,6 +16,7 @@ export default function Header({ onMenuClick, currentPage, navItems }) {
         </button>
         <div className="brand">
           <span className="brand-name">DoAide</span>
+          <span className="brand-sep">|</span>
           <span className="brand-product">Budget</span>
         </div>
       </div>

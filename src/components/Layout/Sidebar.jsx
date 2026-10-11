@@ -5,6 +5,7 @@ export default function Sidebar({ items, current, onNavigate, open, onClose }) {
       <aside className={`sidebar ${open ? 'open' : ''}`}>
         <div className="sidebar-brand">
           <span className="brand-name">DoAide</span>
+          <span className="brand-sep">|</span>
           <span className="brand-product">Budget</span>
         </div>
         <nav className="sidebar-nav">
@@ -21,7 +22,7 @@ export default function Sidebar({ items, current, onNavigate, open, onClose }) {
         </nav>
         <div className="sidebar-footer">
           <a href="https://doaide.com" target="_blank" rel="noopener noreferrer" className="sidebar-link">
-            doaide.com
+            <span className="app-footer-dot" /> A DoAide Product
           </a>
         </div>
       </aside>

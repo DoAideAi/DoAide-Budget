@@ -78,6 +78,12 @@ export default function App() {
           </button>
         ))}
       </nav>
+      <footer className="app-footer">
+        <a href="https://doaide.com" target="_blank" rel="noopener noreferrer" className="app-footer-badge">
+          <span className="app-footer-dot" />
+          A DoAide Product
+        </a>
+      </footer>
       <FloatingActionButton onClick={() => setShowAddForm(true)} />
       {showAddForm && (
         <TransactionForm onClose={() => setShowAddForm(false)} />
