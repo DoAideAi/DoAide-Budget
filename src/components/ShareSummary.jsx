@@ -45,6 +45,10 @@ Track your budget free at budget.doaide.com`
     }
   }
 
+  const handleWhatsApp = () => {
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank')
+  }
+
   return (
     <div className="share-card">
       <h3>Share Your Summary</h3>
@@ -52,6 +56,9 @@ Track your budget free at budget.doaide.com`
       <div className="share-actions">
         <button className="btn btn-secondary" onClick={handleCopy}>
           {copied ? '✓ Copied!' : '📋 Copy'}
+        </button>
+        <button className="btn btn-whatsapp" onClick={handleWhatsApp}>
+          💬 WhatsApp
         </button>
         <button className="btn btn-primary" onClick={handleShare}>
           📤 Share

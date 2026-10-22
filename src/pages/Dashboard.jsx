@@ -3,6 +3,7 @@ import { useBudget } from '../contexts/BudgetContext'
 import { formatCurrency, getCurrentMonth, formatMonth } from '../utils/formatters'
 import { getCategoryInfo } from '../utils/categories'
 import SpendingPieChart from '../components/SpendingPieChart'
+import ShareSummary from '../components/ShareSummary'
 
 function changeMonth(month, delta) {
   const [y, m] = month.split('-').map(Number)
@@ -97,6 +98,8 @@ export default function Dashboard() {
           </div>
         )}
       </div>
+
+      <ShareSummary />
     </div>
   )
 }

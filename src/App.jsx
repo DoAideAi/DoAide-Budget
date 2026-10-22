@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from './components/Layout/Header'
 import Sidebar from './components/Layout/Sidebar'
 import FloatingActionButton from './components/Layout/FloatingActionButton'
@@ -43,6 +43,13 @@ export default function App() {
   const [showAddForm, setShowAddForm] = useState(false)
 
   const PageComponent = PAGES[currentPage] || Dashboard
+
+  useEffect(() => {
+    const item = NAV_ITEMS.find(i => i.key === currentPage)
+    document.title = item && item.key !== 'dashboard'
+      ? `${item.label} — DoAide Budget`
+      : 'DoAide Budget — Free Personal Budget Tracker'
+  }, [currentPage])
 
   const navigate = (page) => {
     setCurrentPage(page)
