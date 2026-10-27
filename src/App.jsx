@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Header from './components/Layout/Header'
 import Sidebar from './components/Layout/Sidebar'
 import FloatingActionButton from './components/Layout/FloatingActionButton'
@@ -12,6 +12,8 @@ import SavingsGoal from './pages/SavingsGoal'
 import CurrencyConverter from './pages/CurrencyConverter'
 import ExportData from './pages/ExportData'
 import TransactionForm from './components/TransactionForm'
+import useSEO from './hooks/useSEO'
+import routeMeta from './routeMeta'
 
 const NAV_ITEMS = [
   { key: 'dashboard', label: 'Dashboard', icon: '📊' },
@@ -37,24 +39,36 @@ const PAGES = {
   export: ExportData,
 }
 
+/* Derive page key from URL pathname, e.g. "/emi-calculator" -> "emi-calculator" */
+function pageFromPath() {
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, '')
+  return path && PAGES[path] ? path : 'dashboard'
+}
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('dashboard')
+  const [currentPage, setCurrentPage] = useState(pageFromPath)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [showAddForm, setShowAddForm] = useState(false)
 
+  // Update <head> meta tags for SEO on every page change
+  useSEO(currentPage)
+
   const PageComponent = PAGES[currentPage] || Dashboard
 
-  useEffect(() => {
-    const item = NAV_ITEMS.find(i => i.key === currentPage)
-    document.title = item && item.key !== 'dashboard'
-      ? `${item.label} — DoAide Budget`
-      : 'DoAide Budget — Free Personal Budget Tracker'
-  }, [currentPage])
-
-  const navigate = (page) => {
+  const navigate = useCallback((page) => {
+    const meta = routeMeta[page]
+    const url = meta ? meta.path : '/'
+    window.history.pushState({ page }, '', url)
     setCurrentPage(page)
     setSidebarOpen(false)
-  }
+    window.scrollTo(0, 0)
+  }, [])
+
+  useEffect(() => {
+    const onPop = () => setCurrentPage(pageFromPath())
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
+  }, [])
 
   return (
     <div className="app">
